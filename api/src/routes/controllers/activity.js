@@ -3,40 +3,29 @@ const { Country, Activity } = require("../../db");
 const getActivitiesByName = (req, res) => {
   Activity.findAll({
     attributes: ["name", "difficulty", "duration", "seasson"],
+    include: [{ model: Country, attributes: ["name"] }],
   })
     .then((activities) => {
-      res.json(activities);
+      res.status(200).send(activities);
     })
     .catch((error) => {
-      res.send(error);
+      res.status(404).send(error);
     });
 };
 
 const postActivity = async (req, res) => {
-  //Recibo el body
+  //Recibimos la info de body
   const { name, difficulty, duration, seasson, countries } = req.body;
 
   try {
-    //Creo la actividad
+    //Creamos la actividad
     const newActivity = await Activity.create({
       name,
       difficulty,
       duration,
       seasson,
     });
-    //Recorremos los paises que trae el body
-
-    //     for (let i = 0; i < countries.length; i++) {
-    //       //Recupero el pais
-    //       const country = await Country.findOne({
-    //         where: {
-    //           id: countries[i].slice(0,2).toUpperCase(),
-    //         },
-    //       });
-    //       //Creo la relacion
-    //       await country.addActivity(newActivity);
-    //     }
-
+    //Recorremos los paises del array countries
     //     for(i in countries){
     //       const country = await Country.findOne({
     //         where: {
@@ -55,17 +44,9 @@ const postActivity = async (req, res) => {
       });
       await newActivity.addCountry(countryActivity);
     });
-
-    // const countryActivity = await Country.findAll({
-    //   where: {
-    //     name: {
-    //       [Op.in]: countries,
-    //     },
-    //   },
-    // });
-    res.json("Activity add successfully");
+    res.status(200).send({ message: "Activity add successfully" });
   } catch (error) {
-    res.send(error);
+    res.status(404).send(error);
   }
 };
 

@@ -15,7 +15,7 @@ const getApi = async () => {
           where: {
             id: country.cca3,
             name: country.name.common,
-            flags: country.flags[0],
+            flags: country.flags[1],
             continent: country.continents[0],
             capital: country.capital ? country.capital[0] : "Not found",
             subregion: country.subregion ? country.subregion : "Not found",
@@ -34,7 +34,16 @@ const getApi = async () => {
 
 const getAllCountries = async () => {
   const countries = await Country.findAll({
-    attributes: ["id", "name", "flags", "continent", "population"],
+    attributes: [
+      "id",
+      "name",
+      "flags",
+      "continent",
+      "population",
+      "capital",
+      "subregion",
+      "area",
+    ],
     include: Activity,
   });
   //[countries] || []
@@ -45,7 +54,7 @@ const getCountryByName = async (name) => {
   const country = await Country.findAll({
     where: {
       name: {
-        [Op.iLike]: name,
+        [Op.iLike]: `%${name}%`,
       },
     },
     attributes: ["id", "name", "flags", "continent", "capital", "population"],
@@ -76,39 +85,21 @@ const getCountries = async (req, res) => {
   }
 };
 
-const getCountriesById = (req, res) => {
+const getCountriesById = async (req, res) => {
   const { id } = req.params;
-
-  // let country = await Country.findByPk(id, {
-  //   include: Activity,
-  // });
-  // country
-  //   ? res.json(country)
-  //   : res.status(404).json({ message: "Country not found" });
-
-  // la promesa findByPk se resuelve con el resultado de la consulta
-  // sinó se resuelve con null
-  Country.findByPk(id.toUpperCase(), {
-    attributes: [
-      "id",
-      "name",
-      "flags",
-      "continent",
-      "population",
-      "capital",
-      "subregion",
-      "area",
-    ],
-    include: Activity,
-  })
-    .then((country) => {
-      country
-        ? res.send(country)
+  try {
+    if (id) {
+      let allCountries = await getAllCountries();
+      let countryId = allCountries.filter(
+        (country) => country.id === id.toUpperCase()
+      );
+      countryId.length > 0
+        ? res.send(countryId)
         : res.status(404).send({ message: "Country not found" });
-    })
-    .catch((error) => {
-      res.send(error);
-    });
+    }
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 module.exports = {
