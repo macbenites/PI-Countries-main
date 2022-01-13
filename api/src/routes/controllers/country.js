@@ -88,15 +88,16 @@ const getCountries = async (req, res) => {
 const getCountriesById = async (req, res) => {
   const { id } = req.params;
   try {
-    if (id) {
-      let allCountries = await getAllCountries();
-      let countryId = allCountries.filter(
-        (country) => country.id === id.toUpperCase()
-      );
-      countryId.length > 0
-        ? res.send(countryId)
-        : res.status(404).send({ message: "Country not found" });
-    }
+    let countryId = await Country.findByPk(id.toUpperCase(), {
+      attributes: ["id", "name", "flags", "continent", "capital", "population"],
+      include: Activity,
+    });
+    // let countryId = allCountries.filter(
+    //   (country) => country.id === id.toUpperCase()
+    // );
+    countryId
+      ? res.send(countryId)
+      : res.status(404).send({ message: "Country not found" });
   } catch (error) {
     res.send(error);
   }

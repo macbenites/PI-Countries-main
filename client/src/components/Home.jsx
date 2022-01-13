@@ -5,6 +5,8 @@ import {
   getAllCountries,
   filterCountryByContinent,
   orderCountries,
+  filterCountryByActivity,
+  getAllActivity,
 } from "../../src/actions";
 import { Link } from "react-router-dom";
 import Country from "./Country";
@@ -14,7 +16,8 @@ import Paged from "./Paged";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { countries, page } = useSelector((state) => state);
+  const { countries, page, allActivity } = useSelector((state) => state);
+
   let countriesPerPage = page === 1 ? 9 : 10;
   const indexOfLastCountry = page * countriesPerPage; // 1 * 9 = 9 | 2 * 10 = 20 | 3 * 10 = 30
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage; // 9 - 9 = 0 | 20 - 10 = 10 | 30 - 10 = 20
@@ -28,6 +31,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getAllCountries());
+    dispatch(getAllActivity());
   }, [dispatch]);
 
   const handleClick = (e) => {
@@ -40,6 +44,11 @@ export default function Home() {
     dispatch(filterCountryByContinent(e.target.value));
   };
 
+  const handleFilterActivity = (e) => {
+    e.preventDefault();
+    dispatch(filterCountryByActivity(e.target.value));
+  };
+
   const handleOrdered = (e) => {
     e.preventDefault();
     dispatch(orderCountries(e.target.value));
@@ -48,10 +57,11 @@ export default function Home() {
   return (
     <ContainerHome>
       <Filters>
-        {/* <Link to="/activity">Crear Actividad</Link> */}
+        <Link to="/create">Crear Actividad</Link>
         <button onClick={handleClick}>Cargar Paises</button>
         <SearchBar />
         <select onChange={handleOrdered}>
+          <option value="">Seleccione orden</option>
           <option value="Asc">Nombre Asc</option>
           <option value="Desc">Nombre Desc</option>
           <option value="Min">Población Asc</option>
@@ -67,11 +77,13 @@ export default function Home() {
           <option value="Africa">Africa</option>
           <option value="Europe">Europe</option>
         </select>
-        <select>
-          <option value="asc">All</option>
-          <option value="desc">Sky</option>
-          <option value="desc">Swin</option>
-          <option value="desc">Dance</option>
+        <select onChange={handleFilterActivity}>
+          <option value="All">Todas</option>
+          {allActivity.map((activity, index) => (
+            <option key={index} value={activity.id}>
+              {activity.name}
+            </option>
+          ))}
         </select>
       </Filters>
       <Paged />

@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
-import background from "./assets/backgroundCountries.svg";
+import background from "./assets/background.jpg";
 
 export const GlobalStyles = createGlobalStyle`
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;600&display=swap');
 :root{
      --main-color : #1F1D36;
      --background-color: #16161a; 
@@ -14,17 +14,22 @@ export const GlobalStyles = createGlobalStyle`
      --border : #010101;
 }
 
-html, body{
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    height: 100%;
+}
+body{
+    
+    min-height: 100vh;
     font-family: 'Poppins', sans-serif;  
-     background-image: url(${background});
-    background-repeat: repeat-y;
+    background-image: url(${background});
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;    
+    
 }
 
-/* background-color: var(--main-color); */
 
 `;

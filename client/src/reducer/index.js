@@ -1,9 +1,11 @@
 import {
   FILTER_BY_CONTINENT,
+  FILTER_BY_ACTIVITY,
   GET_ALL_COUNTRIES,
   GET_COUNTRY_BY_ID,
   SET_CURRENT_PAGE,
   ORDER_COUNTRIES,
+  GET_ALL_ACTIVITY,
 } from "../actions";
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   //copia de todos los paises
   allCountries: [],
   country: [],
+  allActivity: [],
   page: 1,
 };
 
@@ -29,7 +32,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         country: payload,
       };
-
+    case GET_ALL_ACTIVITY:
+      return {
+        ...state,
+        allActivity: payload,
+      };
     case FILTER_BY_CONTINENT:
       const allCountries = state.allCountries;
       const continentFilter =
@@ -41,10 +48,29 @@ function rootReducer(state = initialState, { type, payload }) {
         countries: continentFilter,
       };
 
+    case FILTER_BY_ACTIVITY:
+      const allCountriesActivity = state.allCountries;
+      const activityFilter =
+        payload === "All"
+          ? allCountriesActivity
+          : allCountriesActivity.filter(
+              (country) =>
+                //  si existe actividades && mapeo las
+                // actividades y usamos include para validar
+                // que exista el payload dentro del array
+                country.activities &&
+                country.activities.map((act) => act.name).includes(payload)
+            );
+
+      return {
+        ...state,
+        countries: activityFilter,
+      };
+
     case ORDER_COUNTRIES:
       let ordered = state.countries;
 
-      payload === "Desc" &&
+      payload === "Asc" &&
         ordered.sort((a, b) => {
           // if (a.name < b.name) return -1;
           // if (a.name > b.name) return 1;
@@ -53,7 +79,7 @@ function rootReducer(state = initialState, { type, payload }) {
           //localeCompare() return (-1, 0, 1)
           return a.name.localeCompare(b.name);
         });
-      payload === "Asc" &&
+      payload === "Desc" &&
         ordered.sort((a, b) => {
           return b.name.localeCompare(a.name);
         });

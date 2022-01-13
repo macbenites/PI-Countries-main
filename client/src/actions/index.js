@@ -4,6 +4,7 @@ export const GET_COUNTRY_BY_ID = "GET_COUNTRIES_BY_ID";
 export const GET_ALL_ACTIVITY = "GET_ALL_ACTIVITY";
 export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
+export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 
@@ -56,9 +57,27 @@ export const getCountryById = (id) => {
   };
 };
 
+export const getAllActivity = () => {
+  return (dispatch) => {
+    axios.get(`http://localhost:3001/activities`).then((response) => {
+      return dispatch({
+        type: GET_ALL_ACTIVITY,
+        payload: response.data,
+      });
+    });
+  };
+};
+
 export const filterCountryByContinent = (payload) => {
   return {
     type: FILTER_BY_CONTINENT,
+    payload,
+  };
+};
+
+export const filterCountryByActivity = (payload) => {
+  return {
+    type: FILTER_BY_ACTIVITY,
     payload,
   };
 };
@@ -69,9 +88,25 @@ export const orderCountries = (payload) => {
     payload,
   };
 };
+
 export const setCurrentPage = (payload) => {
   return {
     type: SET_CURRENT_PAGE,
     payload,
+  };
+};
+
+export const createActivity = (activity) => {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:3001/activity`, activity)
+      .then(() => {
+        return dispatch({
+          type: CREATE_ACTIVITY,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };

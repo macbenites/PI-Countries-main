@@ -22,7 +22,7 @@ const { Country, Activity, country_activity } = require("../db.js");
 
 router.get("/countries", getCountries);
 router.get("/countries/:id", getCountriesById);
-router.get("/activityByNames", getActivitiesByName);
+router.get("/activities", getActivitiesByName);
 router.post("/activity", postActivity);
 
 module.exports = router;
