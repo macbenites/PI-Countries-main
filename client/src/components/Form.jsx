@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { createActivity, getAllCountries, orderCountries } from "../actions";
 
 export default function Form() {
@@ -10,19 +11,33 @@ export default function Form() {
   const { countries } = useSelector((state) => state);
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
+  useEffect(() => {
+    dispatch(getAllCountries());
+    setTimeout(() => {
+      dispatch(orderCountries("Asc"));
+    }, 100);
+  }, [dispatch]);
+
+  const validate = (activity) => {
     let errors = {};
+    console.log(activity);
     if (!activity.name) {
-      errors.name = "El nombre es obligatorio";
+      errors.name = "El nombre es requerido";
+    } else if (!/^[a-zA-Z]+$/.test(activity.name)) {
+      errors.name = "El nombre de la actividad debe contener solo letras";
     } else if (!activity.difficulty) {
       errors.difficulty = "La dificultad es obligatoria";
-    } else if (activity.duration < 0) {
+    } else if (parseInt(activity.duration) < 1) {
       errors.duration = "La duracion debe ser mayor a 0";
     } else if (!activity.seasson) {
-      errors.seasson = "La temporada es obligatoria";
+      errors.seasson = "La temporada es requerida";
+    } else if (activity.countries.length < 1) {
+      errors.countries = "El pais es requerido";
     }
     return errors;
   };
+
+  console.log(errors);
 
   let [activity, setActivity] = useState({
     name: "",
@@ -43,7 +58,6 @@ export default function Form() {
 
   const handleSelect = (e) => {
     let countries = [...activity.countries];
-
     if (countries.includes(e.target.value)) {
       alert("El pais ya esta seleccionado");
     } else {
@@ -51,20 +65,43 @@ export default function Form() {
         ...activity,
         countries: [...activity.countries, e.target.value],
       });
+      setErrors({
+        ...activity,
+        countries: [...activity.countries, e.target.value],
+      });
     }
   };
-
+  const handleCheck = (e) => {
+    if (e.target.checked) {
+      setActivity({
+        ...activity,
+        [e.target.name]: e.target.value,
+      });
+    }
+    setErrors(
+      validate({
+        ...activity,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
   const handleDelete = (x) => {
     setActivity({
+      ...activity,
+      countries: activity.countries.filter((country) => country !== x),
+    });
+    setErrors({
       ...activity,
       countries: activity.countries.filter((country) => country !== x),
     });
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(createActivity(activity));
+    !errors && dispatch(createActivity(activity));
+
     alert("Actividad creada");
     navigate("/home");
+
     setActivity({
       name: "",
       difficulty: "",
@@ -74,13 +111,8 @@ export default function Form() {
     });
   };
 
-  useEffect(() => {
-    dispatch(getAllCountries());
-    dispatch(orderCountries("Desc"));
-  }, [dispatch]);
-
   return (
-    <form onSubmit={handleOnSubmit}>
+    <FormContainer onSubmit={handleOnSubmit}>
       <label>Name :</label>
       <input
         type="text"
@@ -140,8 +172,23 @@ export default function Form() {
           </div>
         ))}
       </div>
-
-      <input type="submit" value="Guardar" />
-    </form>
+      {errors.countries && <p>{errors.countries}</p>}
+      <input type="submit" value="Guardar" disabled={errors ? "true" : ""} />
+    </FormContainer>
   );
 }
+
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;

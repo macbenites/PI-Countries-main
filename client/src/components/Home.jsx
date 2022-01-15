@@ -80,7 +80,7 @@ export default function Home() {
         <select onChange={handleFilterActivity}>
           <option value="All">Todas</option>
           {allActivity.map((activity, index) => (
-            <option key={index} value={activity.id}>
+            <option key={index} value={activity.name}>
               {activity.name}
             </option>
           ))}
