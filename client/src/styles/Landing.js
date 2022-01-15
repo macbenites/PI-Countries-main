@@ -32,8 +32,7 @@ export const Content = styled.div`
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.12);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
-  backdrop-filter: blur(0.5rem);
-  -webkit-backdrop-filter: blur(0.5rem);
+  backdrop-filter: blur(10px);
   border-radius: 1rem;
   padding: 2rem;
 `;
