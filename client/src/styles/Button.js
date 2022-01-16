@@ -1,10 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 export const Button = styled.button`
-  color: #fff;
-  background-color: #27ae60;
   border-style: none;
   box-sizing: border-box;
-  box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
   cursor: pointer;
   white-space: nowrap;
   font-size: 16px;
@@ -13,12 +10,29 @@ export const Button = styled.button`
   border-radius: 8px;
   transform: translate3d(0, 0, 0);
   transition: all 0.3s;
+  color: #fffffe;
+  ${(props) => {
+    if (props.primary) {
+      return css`
+        background-color: #01937c;
+      `;
+    }
+    if (props.secondary) {
+      return css`
+        background-color: #ff8906;
+      `;
+    }
+    if (props.tertiary) {
+      return css`
+        background-color: #3da9fc;
+      `;
+    }
+  }}
 
   :hover {
-    background-color: #1e8449;
     opacity: 1;
     transform: translateY(0);
     transition-duration: 0.35s;
-    box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
+    box-shadow: 0px 0px 10px -2px rgba(222, 222, 222, 0.75);
   }
 `;

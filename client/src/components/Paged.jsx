@@ -32,7 +32,8 @@ const ContainerPage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-
+  width: 100%;
+  margin: 1.5rem 0;
   span {
     background-color: #999;
     color: #000;
@@ -42,7 +43,7 @@ const ContainerPage = styled.div`
     font-size: 1.2rem;
     margin: 0 5px 8px;
     border-radius: 5px;
-    min-width: 20px;
+    width: 40px;
     padding: 0 10px;
     height: 40px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -51,7 +52,7 @@ const ContainerPage = styled.div`
   }
 
   span:hover {
-    background-color: #f00;
+    background-color: #ff8906;
     color: #fff;
   }
 `;

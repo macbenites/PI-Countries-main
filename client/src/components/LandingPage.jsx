@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../styles/Button";
 import { Landing, Btn, Content, Title } from "../styles/Landing";
 
 export default function LandingPage() {
@@ -11,7 +12,7 @@ export default function LandingPage() {
           <h1>Countries App</h1>
         </Title>
         <Link to="/home">
-          <Btn>Get Started</Btn>
+          <Button primary>Get Started</Button>
         </Link>
       </Content>
     </Landing>

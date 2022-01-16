@@ -3,17 +3,25 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { createActivity, getAllCountries, orderCountries } from "../actions";
+import {
+  createActivity,
+  getAllActivity,
+  getAllCountries,
+  orderCountries,
+} from "../actions";
+import { Button } from "../styles/Button";
 import { validate } from "../utils/validation";
 
 export default function Form() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { countries } = useSelector((state) => state);
+
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getAllCountries());
+    dispatch(getAllActivity());
     setTimeout(() => {
       dispatch(orderCountries("Asc"));
     }, 100);
@@ -220,7 +228,9 @@ export default function Form() {
         ))}
       </div>
 
-      <input type="submit" value="Guardar" />
+      <Button type="submit" tertiary>
+        Crear Actividad
+      </Button>
     </FormContainer>
   );
 }

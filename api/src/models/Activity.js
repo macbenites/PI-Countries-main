@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
       //Sequelize se encarga de crear el id por default
       name: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       difficulty: {
         type: DataTypes.ENUM("1", "2", "3", "4", "5"),

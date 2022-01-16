@@ -12,11 +12,9 @@ function Detail() {
     dispatch(getCountryById(id));
   }, [dispatch, id]);
 
-  console.log(country);
-
   return (
     <div>
-      {country?.name && (
+      {country?.name ? (
         <div>
           <div>
             <Link to="/home">
@@ -62,6 +60,8 @@ function Detail() {
             </div>
           </div>
         </div>
+      ) : (
+        <h1>No existe Pais...</h1>
       )}
     </div>
   );

@@ -8,11 +8,12 @@ import {
   filterCountryByActivity,
   getAllActivity,
 } from "../../src/actions";
-import { Link } from "react-router-dom";
 import Country from "./Country";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import Paged from "./Paged";
+import Filters from "./Filters";
+import NavBar from "./NavBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -56,36 +57,14 @@ export default function Home() {
 
   return (
     <ContainerHome>
-      <Filters>
-        <Link to="/create">Crear Actividad</Link>
-        <button onClick={handleClick}>Cargar Paises</button>
-        <SearchBar />
-        <select onChange={handleOrdered}>
-          <option value="">Seleccione orden</option>
-          <option value="Asc">Nombre Asc</option>
-          <option value="Desc">Nombre Desc</option>
-          <option value="Min">Población Asc</option>
-          <option value="Max">Población Desc</option>
-        </select>
-        <select onChange={handleFilterContinent}>
-          <option value="All">All</option>
-          <option value="Asia">Asia</option>
-          <option value="South America">South America</option>
-          <option value="North America">North America</option>
-          <option value="Oceania">Ocenia</option>
-          <option value="Antarctica">Antarctica</option>
-          <option value="Africa">Africa</option>
-          <option value="Europe">Europe</option>
-        </select>
-        <select onChange={handleFilterActivity}>
-          <option value="All">Todas</option>
-          {allActivity.map((activity, index) => (
-            <option key={index} value={activity.name}>
-              {activity.name}
-            </option>
-          ))}
-        </select>
-      </Filters>
+      <NavBar />
+      <Filters
+        activities={allActivity}
+        handleClick={handleClick}
+        handleOrdered={handleOrdered}
+        handleFilterContinent={handleFilterContinent}
+        handleFilterActivity={handleFilterActivity}
+      />
       <Paged />
       <Countries>
         {currentCountries?.map((country, index) => (
@@ -105,21 +84,17 @@ export default function Home() {
 
 const Countries = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem 1.2rem;
+  padding: 1rem 0;
 `;
 
 const ContainerHome = styled.div`
-  padding: 2rem 0;
-`;
-const Filters = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 1rem;
-  select,
-  button {
-    width: 200px;
-    border-radius: 5px;
-  }
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  backdrop-filter: blur(1px);
+  border-radius: 1rem;
+  padding: 1rem;
+  min-height: 100vh;
 `;
