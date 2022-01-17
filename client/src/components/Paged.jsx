@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "../actions";
 import styled from "styled-components";
-export default function Paged() {
+export default function Paged({ countriesPerPage }) {
   const dispatch = useDispatch();
   const { countries } = useSelector((state) => state);
   const pageCountries = [];

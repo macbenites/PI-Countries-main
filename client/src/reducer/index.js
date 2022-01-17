@@ -52,7 +52,9 @@ function rootReducer(state = initialState, { type, payload }) {
       const allCountriesActivity = state.allCountries;
       const activityFilter =
         payload === "All"
-          ? allCountriesActivity
+          ? allCountriesActivity.filter(
+              (country) => country.activities.length > 0
+            )
           : allCountriesActivity.filter(
               (country) =>
                 //  si existe actividades && mapeo las

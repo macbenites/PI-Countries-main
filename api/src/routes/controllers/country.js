@@ -89,7 +89,16 @@ const getCountriesById = async (req, res) => {
   const { id } = req.params;
   try {
     let countryId = await Country.findByPk(id.toUpperCase(), {
-      attributes: ["id", "name", "flags", "continent", "capital", "population"],
+      attributes: [
+        "id",
+        "name",
+        "flags",
+        "continent",
+        "capital",
+        "population",
+        "subregion",
+        "area",
+      ],
       include: Activity,
     });
     // let countryId = allCountries.filter(

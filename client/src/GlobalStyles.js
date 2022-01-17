@@ -14,6 +14,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
 }
+
 body{
     
     min-height: 100vh;
@@ -24,9 +25,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;    
-    
+    background-attachment: fixed;      
 }
-
-
 `;
