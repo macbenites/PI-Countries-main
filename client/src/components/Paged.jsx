@@ -33,7 +33,7 @@ const ContainerPage = styled.div`
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   span {
     background-color: #999;
     color: #000;
@@ -41,8 +41,8 @@ const ContainerPage = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    margin: 0 5px 8px;
     border-radius: 5px;
+    margin: 0.3rem;
     width: 40px;
     padding: 0 10px;
     height: 40px;

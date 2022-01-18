@@ -26,18 +26,28 @@ export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 // };
 
 export const getAllCountries = (name) => {
-  return (dispatch) => {
-    axios
-      .get(`http://localhost:3001/countries?name=${name ? name : ""}`)
-      .then((response) => {
-        return dispatch({
-          type: GET_ALL_COUNTRIES,
-          payload: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/countries?name=${name ? name : ""}`
+      );
+      return dispatch({
+        type: GET_ALL_COUNTRIES,
+        payload: response.data,
       });
+    } catch (error) {
+      alert("No se encontraron resultados");
+    }
+
+    // .then((response) => {
+    //   return dispatch({
+    //     type: GET_ALL_COUNTRIES,
+    //     payload: response.data,
+    //   });
+    // })
+    // .catch((error) => {
+    //   alert("No se encontraron resultados");
+    // });
   };
 };
 
@@ -52,7 +62,7 @@ export const getCountryById = (id) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        alert("No se encontro el pais");
       });
   };
 };
@@ -97,16 +107,23 @@ export const setCurrentPage = (payload) => {
 };
 
 export const createActivity = (activity) => {
-  return (dispatch) => {
-    axios
-      .post(`http://localhost:3001/activity`, activity)
-      .then(() => {
-        return dispatch({
-          type: CREATE_ACTIVITY,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+  return async (dispatch) => {
+    try {
+      await axios.post(`http://localhost:3001/activity`, activity);
+      return dispatch({
+        type: CREATE_ACTIVITY,
       });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // .then(() => {
+    //   return dispatch({
+    //     type: CREATE_ACTIVITY,
+    //   });
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   };
 };

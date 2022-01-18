@@ -25,6 +25,7 @@ export default function Home() {
     indexOfFirstCountry,
     indexOfLastCountry
   );
+
   // const currentCountries = sliceMethod(
   //   countries,
   //   indexOfFirstCountry,
@@ -90,15 +91,11 @@ const Countries = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
   padding: 1rem 0;
 `;
 
 const ContainerHome = styled.div`
-  /* background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  backdrop-filter: blur(1px);
-  border-radius: 1rem; */
   padding: 1rem;
   min-height: 100vh;
 `;

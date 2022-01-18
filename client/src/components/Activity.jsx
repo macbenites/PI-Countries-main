@@ -1,25 +1,42 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Activity({ name, difficulty, duration, seasson }) {
   return (
-    <div>
-      <h2>Actividades</h2>
-      <p>
-        <strong>Actividad: </strong>
-        {name}
-      </p>
-      <p>
-        <strong>Dificultad: </strong>
+    <Activities>
+      <h2>{name}</h2>
+      <div>
+        <span>Dificultad</span>
         {difficulty}
-      </p>
-      <p>
-        <strong>Duracion: </strong>
-        {duration}
-      </p>
-      <p>
-        <strong>Temporada: </strong>
+      </div>
+      <div>
+        <span>Duración</span>
+        {duration} Hrs
+      </div>
+      <div>
+        <span>Temporada</span>
         {seasson}
-      </p>
-    </div>
+      </div>
+    </Activities>
   );
 }
+
+const Activities = styled.div`
+  h2 {
+    margin: 0.3rem 0;
+  }
+  width: 270px;
+  div {
+    margin: 0.4rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  border: 1px solid var(--border-color);
+
+  span {
+    color: #fff2ee;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: bold;
+  }
+`;

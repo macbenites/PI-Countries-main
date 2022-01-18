@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../styles/Button";
-import { Landing, Btn, Content, Title } from "../styles/Landing";
+import { Landing, Content, Title } from "../styles/Landing";
 
 export default function LandingPage() {
   return (
