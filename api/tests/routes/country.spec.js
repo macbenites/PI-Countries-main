@@ -25,4 +25,8 @@ describe("Country routes", () => {
   describe("GET /countries", () => {
     it("should get 200", () => agent.get("/countries").expect(200));
   });
+  describe("GET /countries/:id", () => {
+    it("should get 200", () =>
+      agent.get(`/countries/${country.id}`).expect(200));
+  });
 });

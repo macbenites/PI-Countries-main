@@ -9,10 +9,10 @@ import {
   getAllActivity,
 } from "../../src/actions";
 import Country from "./Country";
-import styled from "styled-components";
 import Paged from "./Paged";
 import Filters from "./Filters";
 import NavBar from "./NavBar";
+import { ContainerHome, Countries } from "../styles/Home";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -42,7 +42,6 @@ export default function Home() {
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(getAllCountries());
-    alert("Se han actualizado los paises");
   };
 
   const handleFilterContinent = (e) => {
@@ -86,16 +85,3 @@ export default function Home() {
     </ContainerHome>
   );
 }
-
-const Countries = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 1rem 0;
-`;
-
-const ContainerHome = styled.div`
-  padding: 1rem;
-  min-height: 100vh;
-`;
