@@ -15,7 +15,6 @@ export const BtnForm = styled(Button)`
 export const Country = styled.div`
   margin: 1rem;
   background: rgba(255, 255, 255, 0.12);
-  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3); */
   backdrop-filter: blur(10px);
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -53,15 +52,14 @@ export const Content = styled.div`
 
 export const Select = styled.select`
   cursor: pointer;
-  padding: 7px 10px;
+  padding: 0.5rem 1rem;
   outline: none;
   border: none;
   background: #f0f0f0;
-  font-size: 1em;
+  font-size: 1rem;
   color: var(--background-color);
   font-family: "Quicksand", sans-serif;
   border-radius: 0.75rem;
-  position: relative;
 `;
 export const InputText = styled.input`
   width: 300px;

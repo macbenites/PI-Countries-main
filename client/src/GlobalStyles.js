@@ -7,6 +7,10 @@ export const GlobalStyles = createGlobalStyle`
      --main-color : #1F1D36;
      --background-color: #16161a; 
      --text-color: #fffffe;
+     --primary : #01937c;
+     --secondary : #ff8906;
+     --tertiary : #3da9fc;
+
 }
 
 *{

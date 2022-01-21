@@ -4,7 +4,7 @@ export const Countries = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   padding: 1rem 0;
 `;
 

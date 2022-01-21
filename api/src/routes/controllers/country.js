@@ -73,12 +73,12 @@ const getCountries = async (req, res) => {
       data = await getCountryByName(name);
       data.length > 0
         ? res.send(data)
-        : res.status(404).send({ message: "Country not found" });
+        : res.status(404).send({ message: "No se encontraron coincidencias" });
     } else {
       data = await getAllCountries();
       data.length > 0
         ? res.send(data)
-        : res.status(404).send({ message: "No countries " });
+        : res.status(404).send({ message: "No se encontraron paises " });
     }
   } catch (error) {
     res.send(error);
@@ -106,7 +106,7 @@ const getCountriesById = async (req, res) => {
     // );
     countryId
       ? res.send(countryId)
-      : res.status(404).send({ message: "Country not found" });
+      : res.status(404).send({ message: "País no encontrado" });
   } catch (error) {
     res.send(error);
   }

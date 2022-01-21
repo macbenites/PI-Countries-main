@@ -14,17 +14,17 @@ export const Button = styled.button`
   ${(props) => {
     if (props.primary) {
       return css`
-        background-color: #01937c;
+        background-color: var(--primary);
       `;
     }
     if (props.secondary) {
       return css`
-        background-color: #ff8906;
+        background-color: var(--secondary);
       `;
     }
     if (props.tertiary) {
       return css`
-        background-color: #3da9fc;
+        background-color: var(--tertiary);
       `;
     }
   }}

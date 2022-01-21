@@ -1,68 +1,45 @@
 import axios from "axios";
-export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
-export const GET_COUNTRY_BY_ID = "GET_COUNTRIES_BY_ID";
-export const GET_ALL_ACTIVITY = "GET_ALL_ACTIVITY";
-export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
-export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
-export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY";
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
-
-// export const getAllCountries = (name) => {
-//   return (dispatch) => {
-//     fetch(`http://localhost:3001/countries?name=${name}`)
-//       .then((response) => {
-//         response.json().then((data) => {
-//           dispatch({
-//             type: GET_ALL_COUNTRIES,
-//             payload: data,
-//           });
-//         });
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-// };
+import {
+  GET_ALL_COUNTRIES,
+  GET_COUNTRY_BY_ID,
+  GET_ALL_ACTIVITY,
+  CREATE_ACTIVITY,
+  FILTER_BY_CONTINENT,
+  FILTER_BY_ACTIVITY,
+  SET_CURRENT_PAGE,
+  ORDER_COUNTRIES,
+} from "./types";
 
 export const getAllCountries = (name) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/countries?name=${name ? name : ""}`
-      );
-      return dispatch({
-        type: GET_ALL_COUNTRIES,
-        payload: response.data,
+  return (dispatch) => {
+    axios
+      .get(`http://localhost:3001/countries?name=${name ? name : ""}`)
+      .then((response) => {
+        return dispatch({
+          type: GET_ALL_COUNTRIES,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(error.response.data.message);
+        }
       });
-    } catch (error) {
-      alert("No se encontraron resultados");
-    }
-
-    // .then((response) => {
-    //   return dispatch({
-    //     type: GET_ALL_COUNTRIES,
-    //     payload: response.data,
-    //   });
-    // })
-    // .catch((error) => {
-    //   alert("No se encontraron resultados");
-    // });
   };
 };
 
 export const getCountryById = (id) => {
   return (dispatch) => {
-    axios
-      .get(`http://localhost:3001/countries/${id}`)
+    fetch(`http://localhost:3001/countries/${id}`)
+      .then((data) => data.json())
       .then((response) => {
         return dispatch({
           type: GET_COUNTRY_BY_ID,
-          payload: response.data,
+          payload: response,
         });
       })
       .catch((error) => {
-        alert("No se encontro el pais");
+        console.log(error);
       });
   };
 };
@@ -78,6 +55,18 @@ export const getAllActivity = () => {
   };
 };
 
+export const createActivity = (activity) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`http://localhost:3001/activity`, activity);
+      return dispatch({
+        type: CREATE_ACTIVITY,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const filterCountryByContinent = (payload) => {
   return {
     type: FILTER_BY_CONTINENT,
@@ -103,27 +92,5 @@ export const setCurrentPage = (payload) => {
   return {
     type: SET_CURRENT_PAGE,
     payload,
-  };
-};
-
-export const createActivity = (activity) => {
-  return async (dispatch) => {
-    try {
-      await axios.post(`http://localhost:3001/activity`, activity);
-      return dispatch({
-        type: CREATE_ACTIVITY,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    // .then(() => {
-    //   return dispatch({
-    //     type: CREATE_ACTIVITY,
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
   };
 };

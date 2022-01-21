@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import styled from "styled-components";
 import Form from "./components/Form";
 import Detail from "./components/Detail";
+import NotFound from "./components/NotFound";
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/home/detail/:id" element={<Detail />} />
           <Route path="/create" element={<Form />} />
-          <Route path="*" element={<h1>Page Not Found</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ContentWrapper>

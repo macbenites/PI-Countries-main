@@ -8,7 +8,7 @@ export default function Country({ id, name, flags, continent, population }) {
           <h2>{name}</h2>
           <p>
             <span>Continente</span> : {continent} <br />
-            <span>Población</span> : {population.toLocaleString()}
+            <span>Población</span> : {population?.toLocaleString()}
           </p>
         </Info>
       </Details>

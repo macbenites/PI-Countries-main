@@ -6,7 +6,7 @@ import {
   SET_CURRENT_PAGE,
   ORDER_COUNTRIES,
   GET_ALL_ACTIVITY,
-} from "../actions";
+} from "../actions/types";
 
 const initialState = {
   //array modificado

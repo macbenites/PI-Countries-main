@@ -28,7 +28,7 @@ import { validate } from "../utils/validation";
 export default function Form() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { countries } = useSelector((state) => state);
+  const { countries, allActivity } = useSelector((state) => state);
 
   const [errors, setErrors] = useState({});
 
@@ -48,13 +48,21 @@ export default function Form() {
     countries: [],
   });
 
+  const arrActivities = allActivity.map((x) => x.name);
   const handleOnChange = (e) => {
+    // if (e.target.name === "name") {
+    //   .includes(e.target.value) &&
+    //     setErrors({ ...activity, name: "Actividad Existente" });
+    // }
+
     setActivity({
       ...activity,
       [e.target.name]: e.target.value,
     });
 
-    setErrors(validate({ ...activity, [e.target.name]: e.target.value }));
+    setErrors(
+      validate({ ...activity, [e.target.name]: e.target.value }, arrActivities)
+    );
   };
 
   const handleSelect = (e) => {
@@ -67,10 +75,13 @@ export default function Form() {
       });
 
       setErrors(
-        validate({
-          ...activity,
-          countries: [...activity.countries, e.target.value],
-        })
+        validate(
+          {
+            ...activity,
+            countries: [...activity.countries, e.target.value],
+          },
+          arrActivities
+        )
       );
     }
   };
@@ -82,23 +93,29 @@ export default function Form() {
       });
     }
     setErrors(
-      validate({
-        ...activity,
-        [e.target.name]: e.target.value,
-      })
+      validate(
+        {
+          ...activity,
+          [e.target.name]: e.target.value,
+        },
+        arrActivities
+      )
     );
   };
 
-  const handleDelete = (x) => {
+  const handleDelete = (country) => {
     setActivity({
       ...activity,
-      countries: activity.countries.filter((country) => country !== x),
+      countries: activity.countries.filter((ctry) => ctry !== country),
     });
     setErrors(
-      validate({
-        ...activity,
-        countries: activity.countries.filter((country) => country !== x),
-      })
+      validate(
+        {
+          ...activity,
+          countries: activity.countries.filter((ctry) => ctry !== country),
+        },
+        arrActivities
+      )
     );
   };
 
@@ -151,6 +168,7 @@ export default function Form() {
               type="text"
               name="name"
               value={activity.name}
+              autoComplete="off"
               placeholder="Nombre de actividad"
               onChange={handleOnChange}
             />
@@ -208,6 +226,7 @@ export default function Form() {
               type="number"
               name="duration"
               value={activity.duration}
+              autoComplete="off"
               placeholder="Duración en días"
               onChange={handleOnChange}
             />
@@ -255,7 +274,6 @@ export default function Form() {
           <InputLabel>
             <p>País</p>
             <Select name="countries" onChange={handleSelect}>
-              <option value="">Select Countries</option>
               {countries.map((country, index) => (
                 <option key={index} value={country.name}>
                   {country.name}

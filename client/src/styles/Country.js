@@ -3,10 +3,11 @@ import { LinkTo } from "../styles/Link";
 
 export const CountryContainer = styled.div`
   width: 285px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(1px);
   border-radius: 1rem;
+  transition: all 0.3s 0s ease;
   img {
     width: 100%;
     height: 180px;
@@ -14,7 +15,7 @@ export const CountryContainer = styled.div`
   }
 
   :hover {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    transform: translate(0, -10px);
   }
 `;
 
