@@ -21,9 +21,7 @@ export const getAllCountries = (name) => {
         });
       })
       .catch((error) => {
-        if (error.response) {
-          alert(error.response.data.message);
-        }
+        alert(error.response.data.message);
       });
   };
 };

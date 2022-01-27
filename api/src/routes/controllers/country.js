@@ -71,9 +71,9 @@ const getCountries = async (req, res) => {
   try {
     if (name) {
       data = await getCountryByName(name);
-      data.length > 0
-        ? res.send(data)
-        : res.status(404).send({ message: "No se encontraron coincidencias" });
+      // data.length > 0
+      //   ? res.send({ message: "No se econt..." });
+      res.send(data);
     } else {
       data = await getAllCountries();
       data.length > 0
@@ -101,9 +101,6 @@ const getCountriesById = async (req, res) => {
       ],
       include: Activity,
     });
-    // let countryId = allCountries.filter(
-    //   (country) => country.id === id.toUpperCase()
-    // );
     countryId
       ? res.send(countryId)
       : res.status(404).send({ message: "País no encontrado" });

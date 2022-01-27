@@ -1,5 +1,5 @@
 import { CountryContainer, Details, Info } from "../styles/Country";
-export default function Country({ id, name, flags, continent, population }) {
+export default function Country({ id, name, flags, continent }) {
   return (
     <CountryContainer>
       <Details to={`/home/detail/${id}`}>
@@ -8,7 +8,6 @@ export default function Country({ id, name, flags, continent, population }) {
           <h2>{name}</h2>
           <p>
             <span>Continente</span> : {continent} <br />
-            <span>Población</span> : {population?.toLocaleString()}
           </p>
         </Info>
       </Details>

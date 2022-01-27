@@ -14,8 +14,8 @@ export default function Paged({ countriesPerPage }) {
 
   // Método para calcular el número de páginas
 
-  for (let i = 1; i <= Math.ceil(countries.length / 10); i++) {
-    pageCountries.push(i);
+  for (let i = 0; i <= Math.ceil(countries.length / countriesPerPage); i++) {
+    pageCountries.push(i + 1);
   }
 
   return (

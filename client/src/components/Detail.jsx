@@ -24,9 +24,11 @@ export default function Detail() {
   useEffect(() => {
     setLoader(true);
     dispatch(getCountryById(id));
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoader(false);
     }, 1000);
+
+    return () => clearTimeout(timer);
   }, [dispatch, id]);
 
   return (

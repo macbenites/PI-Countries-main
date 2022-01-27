@@ -6,6 +6,9 @@ export const Countries = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem 0;
+  h1 {
+    color: white;
+  }
 `;
 
 export const ContainerHome = styled.div`

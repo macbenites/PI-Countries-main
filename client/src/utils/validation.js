@@ -1,4 +1,4 @@
-export const validate = (activity, activities) => {
+export const validate = (activity, activities = []) => {
   let errors = {};
   // \u00f1 y \u00d1 son el equivalente para "ñ" y "Ñ",
   if (!activity.name.trim()) {

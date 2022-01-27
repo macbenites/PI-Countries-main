@@ -15,13 +15,6 @@ export default function Filters({
         Cargar Paises
       </Button>
       <SearchBar />
-      <select onChange={handleOrdered}>
-        <option value="">Seleccione orden</option>
-        <option value="Asc">Nombre Asc</option>
-        <option value="Desc">Nombre Desc</option>
-        <option value="Min">Población Asc</option>
-        <option value="Max">Población Desc</option>
-      </select>
       <select onChange={handleFilterContinent}>
         <option value="All">All</option>
         <option value="Asia">Asia</option>
@@ -32,6 +25,14 @@ export default function Filters({
         <option value="Africa">Africa</option>
         <option value="Europe">Europe</option>
       </select>
+      <select onChange={handleOrdered}>
+        <option value="">Seleccione orden</option>
+        <option value="Asc">Nombre Asc</option>
+        <option value="Desc">Nombre Desc</option>
+        <option value="Min">Población Asc</option>
+        <option value="Max">Población Desc</option>
+      </select>
+
       <select onChange={handleFilterActivity}>
         <option value="All">Todas</option>
         {activities?.map((activity, index) => (

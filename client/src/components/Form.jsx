@@ -6,8 +6,8 @@ import trash from "../assets/trash.png";
 import { Link } from "react-router-dom";
 import {
   createActivity,
-  getAllActivity,
   getAllCountries,
+  getAllActivity,
   orderCountries,
 } from "../actions";
 
@@ -35,9 +35,11 @@ export default function Form() {
   useEffect(() => {
     dispatch(getAllCountries());
     dispatch(getAllActivity());
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       dispatch(orderCountries("Asc"));
     }, 1000);
+
+    return () => clearTimeout(timer);
   }, [dispatch]);
 
   const [activity, setActivity] = useState({
@@ -49,12 +51,8 @@ export default function Form() {
   });
 
   const arrActivities = allActivity.map((x) => x.name);
-  const handleOnChange = (e) => {
-    // if (e.target.name === "name") {
-    //   .includes(e.target.value) &&
-    //     setErrors({ ...activity, name: "Actividad Existente" });
-    // }
 
+  const handleOnChange = (e) => {
     setActivity({
       ...activity,
       [e.target.name]: e.target.value,
@@ -274,6 +272,7 @@ export default function Form() {
           <InputLabel>
             <p>País</p>
             <Select name="countries" onChange={handleSelect}>
+              <option value="">Seleccionar País</option>
               {countries.map((country, index) => (
                 <option key={index} value={country.name}>
                   {country.name}

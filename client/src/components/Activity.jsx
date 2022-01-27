@@ -11,7 +11,7 @@ export default function Activity({ name, difficulty, duration, seasson }) {
       </div>
       <div>
         <span>Duración</span>
-        {duration} Hrs
+        {duration} Días
       </div>
       <div>
         <span>Temporada</span>
