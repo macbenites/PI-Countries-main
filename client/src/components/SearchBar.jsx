@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Search } from "../styles/SearchBar";
-import { Button } from "../styles/Button";
+import { Search, IconSearch } from "../styles/SearchBar";
 import { getAllCountries } from "../../src/actions";
 
 export default function SearchBar() {
@@ -26,17 +25,30 @@ export default function SearchBar() {
   };
 
   return (
+    // <div>
+    //   <Search
+    //     type="text"
+    //     placeholder="Search Country..."
+    //     onChange={handleOnChange}
+    //     value={search}
+    //     autoComplete="off"
+    //   />
+    //   <Button type="submit" primary onClick={handleOnClick}>
+    //     Buscar
+    //   </Button>
+    // </div>
+
     <div>
-      <Search
-        type="text"
-        placeholder="Search Country..."
-        onChange={handleOnChange}
-        value={search}
-        autoComplete="off"
-      />
-      <Button type="submit" primary onClick={handleOnClick}>
-        Buscar
-      </Button>
+      <Search onSubmit={handleOnClick}>
+        <IconSearch onClick={handleOnClick} />
+        <input
+          type="text"
+          placeholder="Search Country..."
+          onChange={handleOnChange}
+          value={search}
+          autoComplete="off"
+        />
+      </Search>
     </div>
   );
 }

@@ -24,7 +24,6 @@ export default function App() {
 
 const ContentWrapper = styled.div`
   min-height: 100vh;
-  padding: 1rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
+  max-width: 1200px;
+  margin: auto;
 `;

@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const Load = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,10 +18,12 @@ const spin = keyframes`
 `;
 
 export const Spinner = styled.div`
-  border: 16px solid var(--background-color);
-  width: 200px;
-  height: 200px;
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 0.5rem solid transparent;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   border-left-color: var(--secondary);
   animation: ${spin} 1s linear infinite;
+  margin: 2rem;
 `;

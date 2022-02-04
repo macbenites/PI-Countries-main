@@ -6,13 +6,14 @@ import { getCountryById } from "../actions";
 import { LinkTo } from "../styles/Link";
 import { Button } from "../styles/Button";
 import Loader from "./Loader";
+
 import {
   Container,
   Content,
   Info,
   Activities,
   ActDiv,
-  BtnDetail,
+  BackBtn,
   TopDetail,
 } from "../styles/Detail";
 
@@ -39,15 +40,13 @@ export default function Detail() {
         country?.name && (
           <div>
             <TopDetail>
-              <div>
-                <img src={country.flags} width="100px" alt={country.name} />
-                <h1>{country.name}</h1>
-              </div>
               <Link to="/home">
-                <BtnDetail type="submit" secondary>
-                  Regresar
-                </BtnDetail>
+                <BackBtn />
               </Link>
+              <div>
+                <h2>{country.name}</h2>
+                <img src={country.flags} width="100px" alt={country.name} />
+              </div>
             </TopDetail>
             <hr />
             <Content>

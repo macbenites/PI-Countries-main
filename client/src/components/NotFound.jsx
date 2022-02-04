@@ -1,21 +1,27 @@
 import notFound from "../assets/404.svg";
-import { PageNotFound } from "../styles/NotFound";
-import { LinkTo } from "../styles/Link";
-import { Button } from "../styles/Button";
+import {
+  PageNotFound,
+  TopNotFound,
+  LinkBack,
+  Content,
+} from "../styles/NotFound";
+import { BackBtn } from "../styles/Detail";
 
 export default function NotFound() {
   return (
     <PageNotFound>
-      <div>
-        <h1>Página no encontrada</h1>
+      <Content>
+        <LinkBack to="/home">
+          <BackBtn title="Regresar" />
+        </LinkBack>
 
-        <img src={notFound} alt="Page Not found" />
         <div>
-          <LinkTo to="/home">
-            <Button secondary>Regresar</Button>
-          </LinkTo>
+          <img src={notFound} alt="Page Not found" />
         </div>
-      </div>
+        <TopNotFound>
+          <h2>Página no encontrada</h2>
+        </TopNotFound>
+      </Content>
     </PageNotFound>
   );
 }

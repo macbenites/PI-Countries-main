@@ -11,6 +11,7 @@ import {
   orderCountries,
 } from "../actions";
 
+import { BackBtn } from "../styles/Detail";
 import {
   FormContainer,
   Country,
@@ -21,6 +22,7 @@ import {
   InputText,
   BtnForm,
   Error,
+  Radio,
 } from "../styles/Form";
 
 import { validate } from "../utils/validation";
@@ -145,129 +147,12 @@ export default function Form() {
   return (
     <FormContainer onSubmit={handleOnSubmit}>
       <Top>
-        <h1>Crear Actividad</h1>
-        <div>
-          <Link to="/home">
-            <BtnForm type="submit" secondary>
-              Regresar
-            </BtnForm>
-          </Link>
-          <BtnForm type="submit" tertiary>
-            Guardar
-          </BtnForm>
-        </div>
+        <Link to="/home">
+          <BackBtn title="Regresar" secondary></BackBtn>
+        </Link>
       </Top>
-      <hr />
       <Content>
-        <div>
-          <InputLabel>
-            <p>Nombre </p>
-            <InputText
-              type="text"
-              name="name"
-              value={activity.name}
-              autoComplete="off"
-              placeholder="Nombre de actividad"
-              onChange={handleOnChange}
-            />
-            {errors.name && <Error>{errors.name}</Error>}
-          </InputLabel>
-          <InputLabel>
-            <p>Dificultad</p>
-            <input
-              type="radio"
-              name="difficulty"
-              value="1"
-              onChange={handleCheck}
-            />
-            Muy fácil
-            <br />
-            <input
-              type="radio"
-              name="difficulty"
-              value="2"
-              onChange={handleCheck}
-            />
-            Fácil
-            <br />
-            <input
-              type="radio"
-              name="difficulty"
-              value="3"
-              onChange={handleCheck}
-            />
-            Medio
-            <br />
-            <input
-              type="radio"
-              name="difficulty"
-              value="4"
-              onChange={handleCheck}
-            />
-            Difícil
-            <br />
-            <input
-              type="radio"
-              name="difficulty"
-              value="5"
-              onChange={handleCheck}
-            />
-            Muy difícil
-            <br />
-            {errors.difficulty && <Error>{errors.difficulty}</Error>}
-          </InputLabel>
-        </div>
-        <div>
-          <InputLabel>
-            <p>Duración</p>
-            <InputText
-              type="number"
-              name="duration"
-              value={activity.duration}
-              autoComplete="off"
-              placeholder="Duración en días"
-              onChange={handleOnChange}
-            />
-
-            {errors.duration && <Error>{errors.duration}</Error>}
-          </InputLabel>
-          <InputLabel>
-            <p>Temporada</p>
-            <input
-              type="radio"
-              name="seasson"
-              value="Verano"
-              onChange={handleCheck}
-            />
-            Verano
-            <br />
-            <input
-              type="radio"
-              name="seasson"
-              value="Otoño"
-              onChange={handleCheck}
-            />
-            Otoño
-            <br />
-            <input
-              type="radio"
-              name="seasson"
-              value="Invierno"
-              onChange={handleCheck}
-            />
-            Invierno
-            <br />
-            <input
-              type="radio"
-              name="seasson"
-              value="Primavera"
-              onChange={handleCheck}
-            />
-            Primavera
-            <br />
-            {errors.seasson && <Error>{errors.seasson}</Error>}
-          </InputLabel>
-        </div>
+        <h1>Actividad</h1>
         <div>
           <InputLabel>
             <p>País</p>
@@ -293,6 +178,138 @@ export default function Form() {
               ))}
             </div>
           </InputLabel>
+        </div>
+        <div>
+          <InputLabel>
+            <p>Nombre</p>
+            <InputText
+              type="text"
+              name="name"
+              value={activity.name}
+              autoComplete="off"
+              placeholder="Nombre de actividad"
+              onChange={handleOnChange}
+            />
+            {errors.name && <Error>{errors.name}</Error>}
+          </InputLabel>
+        </div>
+        <div>
+          <InputLabel>
+            <p>Duración</p>
+            <InputText
+              type="number"
+              name="duration"
+              value={activity.duration}
+              autoComplete="off"
+              placeholder="Duración en días"
+              onChange={handleOnChange}
+            />
+
+            {errors.duration && <Error>{errors.duration}</Error>}
+          </InputLabel>
+        </div>
+
+        <div>
+          <InputLabel>
+            <p>Dificultad</p>
+            <Radio>
+              <div>
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="1"
+                  onChange={handleCheck}
+                />
+                Muy fácil
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="2"
+                  onChange={handleCheck}
+                />
+                Fácil
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="3"
+                  onChange={handleCheck}
+                />
+                Medio
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="4"
+                  onChange={handleCheck}
+                />
+                Difícil
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="5"
+                  onChange={handleCheck}
+                />
+                Muy difícil
+              </div>
+            </Radio>
+            {errors.difficulty && <Error>{errors.difficulty}</Error>}
+          </InputLabel>
+        </div>
+        <div>
+          <InputLabel>
+            <p>Temporada</p>
+            <Radio>
+              <div>
+                <input
+                  type="radio"
+                  name="seasson"
+                  value="Verano"
+                  onChange={handleCheck}
+                />
+                Verano
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="seasson"
+                  value="Otoño"
+                  onChange={handleCheck}
+                />
+                Otoño
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="seasson"
+                  value="Invierno"
+                  onChange={handleCheck}
+                />
+                Invierno
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="seasson"
+                  value="Primavera"
+                  onChange={handleCheck}
+                />
+                Primavera
+              </div>
+            </Radio>
+            {errors.seasson && <Error>{errors.seasson}</Error>}
+          </InputLabel>
+        </div>
+        <div>
+          <BtnForm type="submit" tertiary>
+            Guardar
+          </BtnForm>
         </div>
       </Content>
     </FormContainer>

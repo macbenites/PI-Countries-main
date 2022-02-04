@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaFilter } from "react-icons/fa";
+import { IoReload } from "react-icons/io5";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,19 +9,23 @@ import {
   orderCountries,
   filterCountryByActivity,
   getAllActivity,
+  setCurrentPage,
 } from "../../src/actions";
 import Country from "./Country";
 import Paged from "./Paged";
 import Filters from "./Filters";
+import { Button } from "../styles/Button";
 import NavBar from "./NavBar";
 import Loader from "./Loader";
+import SearchBar from "./SearchBar";
 import noResults from "../assets/noResults.svg";
-import { ContainerHome, Countries } from "../styles/Home";
+import { ContainerHome, Countries, Btns, NoResult } from "../styles/Home";
 
 export default function Home() {
   const dispatch = useDispatch();
   const { countries, page, allActivity } = useSelector((state) => state);
   const [loader, setLoader] = useState(true);
+  const [filters, setFilters] = useState(false);
   const [, setOrder] = useState();
   let countriesPerPage = 10;
   const indexOfLastCountry = page * countriesPerPage - 1; // 1 * 10 -1 = 9 | 2 * 10 -1 = 19 | 3 * 10 -1 = 29
@@ -39,15 +45,17 @@ export default function Home() {
 
   useEffect(() => {
     setLoader(true);
-    dispatch(getAllCountries());
     dispatch(getAllActivity());
     timer(1000);
+    dispatch(getAllCountries());
+
     return () => clearTimeout(timer);
   }, [dispatch]);
 
   const handleFilterContinent = (e) => {
     e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
+    dispatch(setCurrentPage(1));
     setOrder(e.target.value);
   };
 
@@ -67,40 +75,52 @@ export default function Home() {
     e.preventDefault();
     setLoader(true);
     dispatch(getAllCountries());
+    dispatch(setCurrentPage(1));
     timer(500);
-    return () => clearTimeout(timer);
   };
 
   return (
     <ContainerHome>
-      <NavBar />
-      <Filters
-        activities={allActivity}
-        handleClick={handleClick}
-        handleOrdered={handleOrdered}
-        handleFilterContinent={handleFilterContinent}
-        handleFilterActivity={handleFilterActivity}
-      />
+      <NavBar handleClick={handleClick} />
+      <SearchBar />
+      <Btns>
+        <Button title="Filtros" primary onClick={() => setFilters(!filters)}>
+          <FaFilter /> <span>Filters</span>
+        </Button>
+        <Button secondary onClick={handleClick}>
+          <IoReload />
+          <span>Cargar Paises</span>
+        </Button>
+      </Btns>
+      {filters && (
+        <Filters
+          activities={allActivity}
+          handleClick={handleClick}
+          handleOrdered={handleOrdered}
+          handleFilterContinent={handleFilterContinent}
+          handleFilterActivity={handleFilterActivity}
+        />
+      )}
       <Paged countriesPerPage={countriesPerPage} />
       <Countries>
         {loader ? (
           <Loader />
         ) : (
-          currentCountries?.map((country, index) => (
-            <Country
-              key={index}
-              id={country.id}
-              name={country.name}
-              flags={country.flags}
-              continent={country.continent}
-            />
-          ))
-        )}
-        {countries.length === 0 && (
-          <div>
-            <img src={noResults} alt="no Results" />
-            <h1>No se encontraron resultados</h1>
-          </div>
+          (countries.length > 0 &&
+            currentCountries?.map((country, index) => (
+              <Country
+                key={index}
+                id={country.id}
+                name={country.name}
+                flags={country.flags}
+                continent={country.continent}
+              />
+            ))) || (
+            <NoResult>
+              <img src={noResults} alt="no Results" />
+              <h2>No se encontraron resultados</h2>
+            </NoResult>
+          )
         )}
       </Countries>
     </ContainerHome>

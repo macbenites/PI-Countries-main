@@ -1,24 +1,35 @@
 import styled from "styled-components";
 
 export const Filter = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  height: 40px;
+  flex-direction: column;
+  margin: 1rem 0;
 
   select {
-    display: inline-block;
-    width: 200px;
+    width: 100%;
     cursor: pointer;
     padding: 7px 10px;
     outline: none;
     border: none;
     background: #f0f0f0;
     font-size: 1em;
+    margin: 0.1rem 0;
     color: var(--background-color);
     font-family: "Quicksand", sans-serif;
-    border: 2px solid rgba(18, 117, 109, 0.2);
+    border: 2px solid rgba(145, 145, 233, 0.5);
     border-radius: 0.75rem;
-    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 2.5rem;
+
+    select {
+      margin: 0;
+      width: 240px;
+    }
   }
 `;

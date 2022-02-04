@@ -1,20 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "../styles/Button";
-import { Landing, Content, Title } from "../styles/Landing";
+import { LinkTo } from "../styles/Link";
+
+import { LandingSec, Content, Title, Reference, Btn } from "../styles/Landing";
 
 export default function LandingPage() {
   return (
-    <Landing>
+    <LandingSec>
       <Content>
         <Title>
           <h2>Henry PI</h2>
           <h1>Countries App</h1>
+          <p>
+            Countries App es una SPA (Single Page Application) con la temática
+            de países, que fue desarrollada durante el Bootcamp de Herny. Toda
+            la información que se mostrará a lo largo de la aplicación esté
+            siendo consumida desde la API
+            <Reference
+              href="https://restcountries.com/"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              RESTCountries
+            </Reference>
+            .
+          </p>
         </Title>
-        <Link to="/home">
-          <Button primary>Get Started</Button>
-        </Link>
+        <LinkTo to="/home">
+          <Btn primary>Empezar</Btn>
+        </LinkTo>
       </Content>
-    </Landing>
+    </LandingSec>
   );
 }

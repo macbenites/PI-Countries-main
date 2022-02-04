@@ -1,20 +1,12 @@
-import { Button } from "../styles/Button";
 import { Filter } from "../styles/Filters";
-
-import SearchBar from "./SearchBar";
 export default function Filters({
   activities,
-  handleClick,
   handleOrdered,
   handleFilterContinent,
   handleFilterActivity,
 }) {
   return (
     <Filter>
-      <Button secondary onClick={handleClick}>
-        Cargar Paises
-      </Button>
-      <SearchBar />
       <select onChange={handleFilterContinent}>
         <option value="All">All</option>
         <option value="Asia">Asia</option>

@@ -3,9 +3,8 @@ import { LinkTo } from "../styles/Link";
 
 export const CountryContainer = styled.div`
   width: 285px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
   border-radius: 1rem;
   transition: all 0.3s 0s ease;
   img {

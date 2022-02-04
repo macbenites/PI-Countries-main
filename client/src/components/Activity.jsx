@@ -25,7 +25,7 @@ const Activities = styled.div`
   h2 {
     margin: 0.3rem 0;
   }
-  width: 270px;
+  width: 100%;
   div {
     margin: 0.4rem 0;
     display: flex;
